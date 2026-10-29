@@ -1,0 +1,46 @@
+﻿ETICHETTE STUDIO
+
+Windows 10/11 a 64 bit. Rust e Tauri non sono richiesti sui PC di destinazione.
+Aprire il file Setup e completare l'installazione.
+Il programma funziona offline. Se WebView2 manca, il primo setup lo scarica da Microsoft.
+
+1. DATI: scegliere il codice e inserire un valore, una numerazione o un elenco.
+2. FORMATO: impostare misure, spazi, bobine, colonne o fogli.
+3. GRAFICA: aggiungere testi e logo, impostare bordi, colori e posizioni.
+4. ESPORTA: scegliere il formato e la cartella, oppure stampare tramite Windows.
+
+STAMPA
+Il programma usa il sistema di stampa Windows, senza un elenco fisso di marche o modelli.
+Rileva tutte le stampanti installate. Il pulsante Aggiungi o configura apre le impostazioni di Windows.
+Nell'anteprima, Scegli stampante e stampa apre la finestra di stampa del sistema.
+Impostare scala 100% e formato del supporto nel driver.
+Per le bobine la stampa diretta usa una pagina per etichetta; i marcatori sono nei file esportati.
+ZPL, EPL e TSPL sono esportazioni per i dispositivi che supportano quei linguaggi.
+La stampa fisica dipende dalle funzioni e dai supporti accettati dal driver della stampante.
+
+IMPORTAZIONE
+Apri progetto: JSON di Etichette Studio, con tutte le impostazioni modificabili.
+Importa design: progetti JSON, PDF, SVG, PNG, JPG, WebP, TIFF, BMP, GIF e AVIF.
+Per i PDF si sceglie la pagina. PDF e SVG permettono di rilevare il formato fisico.
+I design importati sono una grafica unica ad alta qualita: si possono aggiungere nuovi elementi,
+ma i testi e gli oggetti originali non diventano automaticamente elementi modificabili.
+I formati proprietari AI e CDR richiedono prima un'esportazione in PDF, SVG o immagine.
+I CSV/TXT/TSV importano i valori dalla prima colonna, senza intestazione.
+
+ESPORTAZIONI
+SVG, PDF, PNG, JPG, WebP, TIFF, BMP, GIF, AVIF, EPS, PS, DXF, ZPL, EPL, TSPL, CSV, TXT, JSON.
+SVG e PDF sono consigliati per bobine molto lunghe.
+Le immagini troppo lunghe richiedono meno etichette per file, fogli oppure etichette singole.
+DXF contiene tracciati e aree piene; non incorpora immagini o loghi bitmap.
+CSV, TXT e JSON sono esportazioni dei dati.
+Ogni esportazione crea una nuova cartella, senza ZIP.
+
+AUTORI E LICENZE
+Disponibili dal pulsante informativo dell'app e nel file ATTRIBUZIONI.txt.
+
+INTERFACCIA
+14 lingue selezionabili in alto. Arabo e urdu usano la disposizione da destra a sinistra.
+Cliccare su nome o numero nell’anteprima per modificarli con i controlli di testo e posizione.
+Gli avvisi non impongono le scelte grafiche: Continua comunque permette di esportare.
+Se una codifica non rappresenta il valore inserito, è possibile continuare senza quel codice a barre;
+la scritta del valore resta visibile. Il programma non genera un codice finto.

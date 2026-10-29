@@ -1,0 +1,30 @@
+const assert=require('node:assert/strict');
+const fs=require('fs');
+const path=require('path');
+const E=require('../src/engine.cjs');
+const X=require('../src/exporters.cjs');
+const out=path.resolve(__dirname,'fixtures');
+fs.mkdirSync(out,{recursive:true});
+const vals=E.values({...E.DEFAULTS,start:'380400',quantity:10000});
+assert.equal(vals.length,10000);assert.equal(vals[0],'380400');assert.equal(vals.at(-1),'390399');assert.equal(new Set(vals).size,10000);
+const pages=E.pages(E.DEFAULTS,vals);assert.equal(pages.length,10);assert(pages.every(p=>p.positions.length===1000));assert.equal(pages[0].width,55);assert.equal(pages[0].height,27028);
+assert.throws(()=>E.label({...E.DEFAULTS,barcode:'code128c'},'12345'),/pari/);
+assert.throws(()=>E.label({...E.DEFAULTS,barcode:'code128c'},'AB1234'),/cifre/);
+assert.throws(()=>E.label({...E.DEFAULTS,barcode:'ean13'},'8001234567890'),/check|Checksum|checksum/i);
+assert(E.label({...E.DEFAULTS,width:15},'380400').errors.length);
+assert(E.label({...E.DEFAULTS,headerY:10},'380400').errors.some(s=>s.includes('sovrappone')));
+assert.deepEqual(E.values({...E.DEFAULTS,mode:'sequence',start:'000001',quantity:3,digits:6}),['000001','000002','000003']);
+assert.deepEqual(E.values({...E.DEFAULTS,mode:'list',list:'"000123";test\n"000124";test'}),['000123','000124']);
+assert.equal(E.values({...E.DEFAULTS,mode:'sequence',start:'99999999999999999999',quantity:2,digits:1})[1],'100000000000000000000');
+assert.equal(E.pages({...E.DEFAULTS,layout:'columns'},vals).length,1);
+assert.equal(E.pages({...E.DEFAULTS,layout:'columns'},vals)[0].width,568);
+assert(E.pages({...E.DEFAULTS,layout:'sheet'},vals).every(p=>p.width===210&&p.height===297));
+const cases=[];
+for(const [name,barcode,value,extra]of [['code128c','code128c','380400',{}],['code39','code39','ABC123',{module:.25}],['ean13','ean13','800123456789',{module:.33}],['qrcode','qrcode','PROVA QR',{module:.5}],['datamatrix','datamatrix','PROVA123',{module:.5}],['pdf417','pdf417','PROVA PDF417',{module:.35}]]){
+ const c={...E.DEFAULTS,...extra,barcode,mode:'fixed',value,quantity:1,header:'',showValue:false};
+ const scene=E.label(c,value);assert.deepEqual(scene.errors,[],name);const svg=E.sceneSVG(scene);fs.writeFileSync(path.join(out,name+'.svg'),svg);cases.push({name,scene,svg});
+}
+const roll=E.compose(E.DEFAULTS,vals,pages[0]);cases.push({name:'bobina1000',scene:roll});
+fs.writeFileSync(path.join(out,'native-input.json'),JSON.stringify(cases));
+fs.writeFileSync(path.join(out,'border.svg'),E.sceneSVG(E.label({...E.DEFAULTS,border:true,radius:2},'380400')));
+Promise.all(cases.filter(s=>s.svg).map(async test=>{fs.writeFileSync(path.join(out,test.name+'.eps'),await X.postscript(test.scene,true));fs.writeFileSync(path.join(out,test.name+'.dxf'),X.dxf(test.scene));})).then(()=>console.log('Motore: dati, bordi, limiti, layout, formati e fixture per backend Rust verificati.')).catch(e=>{console.error(e);process.exitCode=1;});
