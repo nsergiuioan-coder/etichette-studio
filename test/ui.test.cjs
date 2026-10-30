@@ -31,6 +31,7 @@ const server=http.createServer((request,response)=>{
     });
     await page.goto(`http://127.0.0.1:${server.address().port}`);
     await page.waitForSelector('#labelPreview svg');await page.waitForSelector('#openHistory');
+    assert(await page.locator('#previewStage').evaluate(el=>el.scrollHeight<=el.clientHeight+2),'Fitted preview must not scroll vertically');
     await page.locator('[data-tab="format"]').click();
     assert.equal(await page.locator('[data-key="width"]').getAttribute('aria-description'),'mm');
     assert.equal(await page.locator('[data-key="width"]').locator('..').locator('.field-unit').textContent(),'mm');
@@ -63,6 +64,7 @@ const server=http.createServer((request,response)=>{
       await page.setViewportSize({width:1020,height:740});await page.locator('#languageSelect').selectOption(language);await page.waitForTimeout(100);
       assert.equal(await page.getAttribute('html','dir'),['ar','ur'].includes(language)?'rtl':'ltr');
       assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false,language+' page overflow');
+      assert(await page.locator('#previewStage').evaluate(el=>el.scrollHeight<=el.clientHeight+2),language+' fitted preview overflow');
       const badButtons=await page.locator('.header-actions button,.tabs button,.panel-navigation button').evaluateAll(buttons=>buttons.filter(button=>button.scrollWidth>button.clientWidth+2||button.scrollHeight>button.clientHeight+2).map(button=>button.id||button.textContent));
       assert.deepEqual(badButtons,[],language+' clipped buttons');
       assert(!await page.locator('#exportSummary').textContent().then(text=>text.includes('{')));

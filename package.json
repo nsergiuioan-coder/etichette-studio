@@ -1,7 +1,7 @@
 {
   "name": "etichette-studio",
   "productName": "Etichette Studio",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Offline Windows label designer with barcode generation, roll layouts and multiple export formats.",
   "author": "NIS",
   "license": "MIT",

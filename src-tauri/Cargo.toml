@@ -1,6 +1,6 @@
 [package]
 name = "etichette-studio"
-version = "1.1.0"
+version = "1.1.1"
 description = "Generatore offline di etichette e codici a barre"
 edition = "2021"
 authors = ["NIS"]
