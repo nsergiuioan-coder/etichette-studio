@@ -31,8 +31,9 @@ fs.mkdirSync(path.join(root,'dist'),{recursive:true});
 fs.copyFileSync(path.join(root,'node_modules/pdfjs-dist/build/pdf.worker.min.mjs'),path.join(root,'dist/pdf.worker.min.mjs'));
 for(const folder of ['cmaps','standard_fonts','wasm'])fs.cpSync(path.join(root,'node_modules/pdfjs-dist',folder),path.join(root,'dist',folder),{recursive:true});
 for(const name of ['style.css','print.html'])fs.copyFileSync(path.join(root,'app',name),path.join(root,'dist',name));
+fs.appendFileSync(path.join(root,'dist/style.css'),'\n'+fs.readFileSync(path.join(root,'app/updates.css'),'utf8'));
 for(const name of ['Vera.ttf','VeraBd.ttf','ATTRIBUZIONI.txt'])fs.copyFileSync(path.join(root,'assets',name),path.join(root,'dist',name));
 let html=fs.readFileSync(path.join(root,'app/index.html'),'utf8').replace('<script src="renderer.js"></script>','<script src="bundle.js"></script>').replace("connect-src 'none'","connect-src ipc: http://ipc.localhost");
-html=html.replace('Stampa una etichetta di prova','Apri PDF di prova per la stampa');
+
 fs.writeFileSync(path.join(root,'dist/index.html'),html);
-esbuild.build({entryPoints:{bundle:path.join(root,'app/bridge.js'),print:path.join(root,'app/print.js')},bundle:true,outdir:path.join(root,'dist'),platform:'browser',format:'iife',target:['chrome130'],loader:{'.ttf':'binary','.txt':'text'},external:['fs'],minify:true,legalComments:'linked'}).then(()=>console.log('Interfaccia Tauri compilata.')).catch(error=>{console.error(error);process.exitCode=1;});
+esbuild.build({entryPoints:{bundle:path.join(root,'app/bridge.js'),print:path.join(root,'app/print.js'),'generate-worker':path.join(root,'app/generate-worker.js')},bundle:true,outdir:path.join(root,'dist'),platform:'browser',format:'iife',target:['chrome130'],loader:{'.ttf':'binary','.txt':'text'},external:['fs'],minify:true,legalComments:'linked'}).then(()=>console.log('Interfaccia Tauri compilata.')).catch(error=>{console.error(error);process.exitCode=1;});

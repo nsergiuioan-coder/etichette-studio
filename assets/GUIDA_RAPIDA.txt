@@ -44,3 +44,17 @@ Cliccare su nome o numero nell’anteprima per modificarli con i controlli di te
 Gli avvisi non impongono le scelte grafiche: Continua comunque permette di esportare.
 Se una codifica non rappresenta il valore inserito, è possibile continuare senza quel codice a barre;
 la scritta del valore resta visibile. Il programma non genera un codice finto.
+
+CRONOLOGIA E AGGIORNAMENTI
+Cronologia conserva le creazioni su questo PC e permette di cercarle e riaprire i progetti.
+Le misure e le posizioni sono in millimetri, indicati accanto ai campi.
+In Esporta, Prestazioni regola i lavori paralleli: automatiche, risparmio risorse o massime.
+Non c'è un tetto fisso di 100.000 etichette; restano i limiti del PC, del disco e dei formati.
+Gli aggiornamenti ufficiali sono segnalati da un piccolo avviso e si installano dopo conferma.
+Più tardi rimanda l'avviso. Non chiedermelo più disattiva i controlli automatici.
+Aggiornamenti permette sempre il controllo manuale e di riattivare gli avvisi automatici.
+Prima di aggiornare, salvare il progetto. L'app viene chiusa e riaperta durante l'installazione.
+Le versioni 1.0 richiedono una prima installazione della versione nuova per avere l'updater.
+
+NIS
+Copyright (c) 2026 NIS. Licenza MIT. Componenti esterni: vedere ATTRIBUZIONI.txt.

@@ -9,5 +9,11 @@ release/
 *.msi
 .env
 .env.*
+*.key
+*.key.pub
+*.password
 .DS_Store
 Thumbs.db
+
+src/engine-browser.js
+src/vector-browser.js

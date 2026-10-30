@@ -1,8 +1,9 @@
 [package]
 name = "etichette-studio"
-version = "1.0.0"
+version = "1.1.0"
 description = "Generatore offline di etichette e codici a barre"
 edition = "2021"
+authors = ["NIS"]
 license = "MIT"
 
 [build-dependencies]
@@ -23,6 +24,7 @@ png = "0.18"
 tiff = "0.11"
 webview2-com = "0.39"
 windows-core = "0.62"
+tauri-plugin-updater = { version = "2", default-features = false, features = ["native-tls", "system-proxy", "zip"] }
 
 [profile.release]
 strip = true

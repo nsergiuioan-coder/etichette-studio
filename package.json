@@ -1,20 +1,22 @@
 {
   "name": "etichette-studio",
   "productName": "Etichette Studio",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Offline Windows label designer with barcode generation, roll layouts and multiple export formats.",
-  "author": "nsergiuioan-coder",
+  "author": "NIS",
   "license": "MIT",
   "scripts": {
     "start": "node build-frontend.cjs && tauri dev",
     "test": "node test/engine.test.cjs",
-    "build": "node build-frontend.cjs && tauri build --bundles nsis"
+    "build": "node build-frontend.cjs && tauri build --bundles nsis",
+    "test:ui": "node test/updates.test.cjs && node test/ui.test.cjs"
   },
   "dependencies": {
     "@bwip-js/browser": "^4.11.4",
     "@tauri-apps/api": "^2.12.4",
     "@tauri-apps/plugin-dialog": "^2.8.4",
     "@tauri-apps/plugin-opener": "^2.7.2",
+    "@tauri-apps/plugin-updater": "^2.14.1",
     "@xmldom/xmldom": "^0.8.11",
     "bwip-js": "^4.11.4",
     "csv-parse": "^6.1.0",
@@ -27,7 +29,8 @@
   },
   "devDependencies": {
     "@tauri-apps/cli": "^2.12.4",
-    "esbuild": "^0.28.2"
+    "esbuild": "^0.28.2",
+    "playwright-core": "^1.64.1"
   },
   "repository": {
     "type": "git",

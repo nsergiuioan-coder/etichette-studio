@@ -1,6 +1,6 @@
 Etichette Studio
-Project owner and maintainer: nsergiuioan-coder
-Copyright (c) 2026 nsergiuioan-coder
+Project owner and maintainer: NIS (nsergiuioan-coder)
+Copyright (c) 2026 NIS
 Official source: https://github.com/nsergiuioan-coder/etichette-studio
 Official binary releases: https://github.com/nsergiuioan-coder/etichette-studio/releases
 
@@ -11,3 +11,12 @@ See assets/ATTRIBUZIONI.txt and assets/LICENZE for their notices and license tex
 
 The software license does not authorize misrepresenting a fork or modified binary
 as an official release or as endorsed by the project owner.
+
+Build and test tooling: Playwright (Microsoft), esbuild (Evan Wallace), GitHub Actions
+(actions/checkout, actions/setup-node, actions/setup-python), pnpm/action-setup and
+dtolnay/rust-toolchain. Their repositories and licenses remain authoritative:
+https://github.com/microsoft/playwright
+https://github.com/evanw/esbuild
+https://github.com/actions
+https://github.com/pnpm/action-setup
+https://github.com/dtolnay/rust-toolchain

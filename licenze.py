@@ -14,7 +14,7 @@ lines=['ETICHETTE STUDIO - AUTORI E LICENZE','',
        'Barcode Writer in Pure PostScript (BWIPP): Terry Burton - https://github.com/bwipp/postscriptbarcode',
        'Tauri Programme e collaboratori - https://github.com/tauri-apps/tauri',
        'Bitstream Vera: Bitstream Inc. - https://www.gnome.org/fonts/', '']
-for name in ['@bwip-js/browser','bwip-js','opentype.js','svgpath','csv-parse','@tauri-apps/api','@tauri-apps/plugin-dialog','@tauri-apps/plugin-opener','@xmldom/xmldom','pdfkit','sharp','esbuild','pdfjs-dist']:
+for name in ['@bwip-js/browser','bwip-js','opentype.js','svgpath','csv-parse','@tauri-apps/api','@tauri-apps/plugin-dialog','@tauri-apps/plugin-opener','@tauri-apps/plugin-updater','@xmldom/xmldom','pdfkit','sharp','esbuild','pdfjs-dist']:
     folder=root/'node_modules'/name
     data=json.loads((folder/'package.json').read_text(encoding='utf-8'))
     dest=out/name.replace('/','_')
@@ -35,6 +35,13 @@ lines.extend(['Traduzioni iniziali interfaccia assistite da Google Translate, ar
 lock=root/'src-tauri/Cargo.lock'
 if lock.exists():
     packages=tomllib.loads(lock.read_text())['package']
+    expected={f"rust_{package['name']}_{package['version']}"for package in packages}
+    resolved=out.resolve()
+    for old in out.glob('rust_*'):
+        if old.is_dir()and old.name not in expected:
+            target=old.resolve()
+            if target.parent!=resolved:raise ValueError('License path outside the generated directory')
+            shutil.rmtree(target)
     registries=list((Path.home()/'.cargo/registry/src').glob('*'))
     for package in packages:
         for registry in registries:

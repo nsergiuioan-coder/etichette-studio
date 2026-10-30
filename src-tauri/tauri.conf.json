@@ -1,22 +1,64 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
   "productName": "Etichette Studio",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "identifier": "it.etichette.studio",
-  "build": {"frontendDist": "../dist"},
+  "build": {
+    "frontendDist": "../dist"
+  },
   "app": {
     "withGlobalTauri": false,
-    "windows": [{"label":"main","title":"Etichette Studio","width":1440,"height":960,"minWidth":1020,"minHeight":740}],
-    "security": {"csp":"default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; worker-src 'self' blob:; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self' ipc: http://ipc.localhost; object-src 'none'; base-uri 'none'"}
+    "windows": [
+      {
+        "label": "main",
+        "title": "Etichette Studio",
+        "width": 1440,
+        "height": 960,
+        "minWidth": 1020,
+        "minHeight": 740
+      }
+    ],
+    "security": {
+      "csp": "default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; worker-src 'self' blob:; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self' ipc: http://ipc.localhost; object-src 'none'; base-uri 'none'"
+    }
   },
   "bundle": {
-    "active":true,
-    "targets":["nsis"],
-    "icon":["../assets/icon.ico"],
-    "resources":["../assets/ATTRIBUZIONI.txt"],
+    "active": true,
+    "targets": [
+      "nsis"
+    ],
+    "icon": [
+      "../assets/icon.ico"
+    ],
+    "resources": [
+      "../assets/ATTRIBUZIONI.txt"
+    ],
     "windows": {
-      "webviewInstallMode":{"type":"downloadBootstrapper","silent":true},
-      "nsis":{"languages":["Italian"],"displayLanguageSelector":false,"installMode":"currentUser"}
+      "webviewInstallMode": {
+        "type": "downloadBootstrapper",
+        "silent": true
+      },
+      "nsis": {
+        "languages": [
+          "Italian"
+        ],
+        "displayLanguageSelector": false,
+        "installMode": "currentUser"
+      }
+    },
+    "createUpdaterArtifacts": true,
+    "publisher": "NIS",
+    "copyright": "Copyright (c) 2026 NIS"
+  },
+  "plugins": {
+    "updater": {
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IEMyNzFCRDk5NjA3QTgxNjAKUldSZ2dYcGdtYjF4d3RZeThuV2VhYjBHSUlWR3hxTGZnZktxZk5zbmhVcEtoMWw0T1kvSFpxQ0IK",
+      "endpoints": [
+        "https://github.com/nsergiuioan-coder/etichette-studio/releases/latest/download/latest.json"
+      ],
+      "windows": {
+        "installMode": "passive"
+      }
     }
   }
 }
